@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:login_parcial/components/login/login_body.dart';
 
 class Login extends StatelessWidget {
@@ -13,10 +12,10 @@ class Login extends StatelessWidget {
       body: Container(
         width: mediaQuery.width,
         height: mediaQuery.height,
-        color: Color.fromRGBO(18, 31, 47, 1),
+        color: const Color.fromRGBO(18, 31, 47, 1),
         child: const Center(
           child: Padding(
-            padding: EdgeInsets.all(5),
+            padding: EdgeInsets.all(15),
             child: LoginBody(),
           ),
         ),

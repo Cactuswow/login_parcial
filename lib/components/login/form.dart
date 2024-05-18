@@ -8,7 +8,7 @@ class FormLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color.fromARGB(255, 43, 51, 83),
+      color: const Color.fromARGB(255, 43, 51, 83),
       child: const Form(
         child: Padding(
           padding: EdgeInsets.only(
@@ -19,6 +19,7 @@ class FormLogin extends StatelessWidget {
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 "LOGIN",
@@ -28,7 +29,10 @@ class FormLogin extends StatelessWidget {
                 ),
               ),
               Text("Ingresa tu correo y contraseña"),
-              SizedBox(height: 20),
+              SizedBox(
+                height: 20,
+                width: 20,
+              ),
               InputField(
                 label: "Ingresa tu correo",
                 icon: Icons.person,
@@ -38,7 +42,10 @@ class FormLogin extends StatelessWidget {
                 label: "Ingresa tu contraseña",
                 icon: Icons.key,
               ),
-              SizedBox(height: 20),
+              SizedBox(
+                height: 20,
+                width: 20,
+              ),
               ButtonSubmit(),
             ],
           ),
