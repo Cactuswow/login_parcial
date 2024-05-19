@@ -3,7 +3,15 @@ import 'package:flutter/material.dart';
 class InputField extends StatelessWidget {
   final String label;
   final IconData icon;
-  const InputField({super.key, required this.label, required this.icon});
+  final TextEditingController controller;
+  final dynamic validator;
+  const InputField({
+    super.key,
+    required this.label,
+    required this.icon,
+    required this.controller,
+    required this.validator,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +28,14 @@ class InputField extends StatelessWidget {
         ),
         prefixIcon: Icon(
           icon,
-          color: Color.fromARGB(255, 64, 70, 104),
+          color: const Color.fromARGB(255, 64, 70, 104),
         ),
         filled: true,
-        fillColor: Color.fromARGB(20, 64, 70, 104),
+        fillColor: const Color.fromARGB(20, 64, 70, 104),
         labelText: label,
       ),
+      controller: controller,
+      validator: validator,
     );
   }
 }

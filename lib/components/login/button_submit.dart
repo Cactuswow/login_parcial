@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class ButtonSubmit extends StatelessWidget {
-  const ButtonSubmit({super.key});
+  final dynamic action;
+  const ButtonSubmit({super.key, required this.action});
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {},
-      
+      onPressed: action,
       style: ButtonStyle(
         padding: const MaterialStatePropertyAll(
           EdgeInsets.only(

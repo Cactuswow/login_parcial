@@ -9,7 +9,7 @@ class LoginBody extends StatelessWidget {
     final mediaQuery = MediaQuery.of(context).size;
 
     Widget loginContainer({children}) {
-      final container = mediaQuery.width <= 600
+      final container = mediaQuery.width <= 760
           ? Column(
               children: children,
               mainAxisSize: MainAxisSize.min,
@@ -19,6 +19,13 @@ class LoginBody extends StatelessWidget {
       return Container(
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10)),
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 15,
+              color: Colors.black26,
+              spreadRadius: 3,
+            )
+          ],
         ),
         constraints: const BoxConstraints(maxWidth: 1200, maxHeight: 700),
         clipBehavior: Clip.hardEdge,
@@ -29,11 +36,11 @@ class LoginBody extends StatelessWidget {
     return loginContainer(
       children: [
         const Expanded(
-          flex: 2,
+          flex: 3,
           child: FormLogin(),
         ),
         Expanded(
-          flex: 1,
+          flex: 2,
           child: Container(
             foregroundDecoration: const BoxDecoration(
               image: DecorationImage(
