@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:login_parcial/components/login/button_submit.dart';
 import 'package:login_parcial/components/login/constants.dart';
 import 'package:login_parcial/components/login/input_field.dart';
@@ -40,16 +41,21 @@ class _FormLoginState extends ConsumerState<FormLogin> {
   Widget build(BuildContext context) {
     void save() {
       if (formKey.currentState!.validate()) {
-        showSnackBar(context);
         final users = ref.read(registeredUsersProvider);
+        final user = getUserLogged(
+          userEmailController.text,
+          passwordController.text,
+          users,
+        );
 
-        ref.read(userLoggedProvider.notifier).update(
-              (state) => getUserLogged(
-                userEmailController.text,
-                passwordController.text,
-                users,
-              ),
-            );
+        if (user != null) {
+          ref.read(userLoggedProvider.notifier).update((state) => user);
+          showSnackBar(context, '¡Bienvenido! ${user.name}');
+          context.push("/");
+          return;
+        }
+
+        showSnackBar(context, 'No se ha encontrado ninguna coincidencia');
       }
     }
 

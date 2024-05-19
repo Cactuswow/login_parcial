@@ -21,10 +21,10 @@ String? passwordValidator(dynamic value) {
   return null;
 }
 
-void showSnackBar(context) {
+void showSnackBar(BuildContext context, String text) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      content: const Text('Formulario hecho'),
+      content: Text(text),
       action: SnackBarAction(
         label: "Ok",
         onPressed: () {},
@@ -33,9 +33,11 @@ void showSnackBar(context) {
   );
 }
 
-User getUserLogged(String userEmail, String userPassword, List<User> users) {
-  return users
-      .where(
-          (user) => user.email == userEmail && user.password == user.password)
-      .first;
+User? getUserLogged(String userEmail, String userPassword, List<User> users) {
+  final usersFiltered = users.where(
+      (user) => user.email == userEmail && user.password == user.password);
+
+  if (usersFiltered.isEmpty) return null;
+
+  return usersFiltered.first;
 }
