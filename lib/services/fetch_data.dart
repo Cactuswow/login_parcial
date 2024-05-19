@@ -1,5 +1,12 @@
 import 'package:dio/dio.dart';
 
-Future<dynamic> getData(String url) async {
-  return await Dio().get(url);
+Dio dio = Dio();
+
+Future<dynamic> getFetchData(String url) async {
+  try {
+    Response response = await dio.get(url);
+    return response.data;
+  } catch (e) {
+    return [];
+  }
 }

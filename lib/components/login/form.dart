@@ -1,45 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:login_parcial/components/login/button_submit.dart';
-import 'package:login_parcial/components/login/constanst.dart';
+import 'package:login_parcial/components/login/constants.dart';
 import 'package:login_parcial/components/login/input_field.dart';
+import 'package:login_parcial/context/user_context.dart';
 
-class FormLogin extends StatefulWidget {
+class FormLogin extends ConsumerStatefulWidget {
   const FormLogin({super.key});
 
   @override
-  State<FormLogin> createState() => _FormLoginState();
+  ConsumerState<FormLogin> createState() => _FormLoginState();
 }
 
-class _FormLoginState extends State<FormLogin> {
+class _FormLoginState extends ConsumerState<FormLogin> {
+  final TextEditingController userEmailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    userEmailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getUsers();
+  }
+
+  void getUsers() async {
+    final users = ref.read(registeredUsersProvider);
+    final newUsers = await getRegisteredUsersApi(users);
+    ref.read(registeredUsersProvider.notifier).update((state) => newUsers);
+  }
+
   @override
   Widget build(BuildContext context) {
-    final TextEditingController userController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
-    final formKey = GlobalKey<FormState>();
-
     void save() {
       if (formKey.currentState!.validate()) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Text('Formulario hecho'),
-            action: SnackBarAction(
-              label: "Ok",
-              onPressed: () {},
-            ),
-          ),
-        );
+        showSnackBar(context);
+        final users = ref.read(registeredUsersProvider);
+
+        ref.read(userLoggedProvider.notifier).update(
+              (state) => getUserLogged(
+                userEmailController.text,
+                passwordController.text,
+                users,
+              ),
+            );
       }
     }
 
-    @override
-    void dispose() {
-      userController.dispose();
-      passwordController.dispose();
-      super.dispose();
-    }
-
     return Container(
-      color: const Color.fromARGB(255, 43, 51, 83),
+      color: const Color.fromRGBO(43, 51, 83, 1),
       child: Form(
         key: formKey,
         child: Padding(
@@ -68,7 +83,7 @@ class _FormLoginState extends State<FormLogin> {
               InputField(
                   label: "Ingresa tu correo",
                   icon: Icons.person,
-                  controller: userController,
+                  controller: userEmailController,
                   validator: userEmailValidator),
               const SizedBox(height: 15),
               InputField(
