@@ -77,11 +77,14 @@ class _FormLoginState extends ConsumerState<FormLogin> {
               const Text(
                 "LOGIN",
                 style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 28,
-                ),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 28,
+                    color: Colors.white),
               ),
-              const Text("Ingresa tu correo y contraseña"),
+              const Text(
+                "Ingresa tu correo y contraseña",
+                style: TextStyle(color: Colors.white),
+              ),
               const SizedBox(
                 height: 20,
                 width: 20,

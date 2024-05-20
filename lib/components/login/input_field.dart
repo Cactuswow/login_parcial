@@ -17,23 +17,24 @@ class InputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       decoration: InputDecoration(
-        focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Color.fromARGB(255, 64, 70, 104)),
-          borderRadius: BorderRadius.circular(5.5),
-        ),
-        enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Color.fromARGB(255, 64, 70, 104),
+          focusedBorder: OutlineInputBorder(
+            borderSide:
+                const BorderSide(color: Color.fromARGB(255, 64, 70, 104)),
+            borderRadius: BorderRadius.circular(5.5),
           ),
-        ),
-        prefixIcon: Icon(
-          icon,
-          color: const Color.fromARGB(255, 64, 70, 104),
-        ),
-        filled: true,
-        fillColor: const Color.fromARGB(20, 64, 70, 104),
-        labelText: label,
-      ),
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Color.fromARGB(255, 64, 70, 104),
+            ),
+          ),
+          prefixIcon: Icon(
+            icon,
+            color: const Color.fromARGB(255, 64, 70, 104),
+          ),
+          filled: true,
+          fillColor: const Color.fromARGB(20, 64, 70, 104),
+          labelText: label,
+          labelStyle: const TextStyle(color: Colors.grey)),
       controller: controller,
       validator: validator,
     );
