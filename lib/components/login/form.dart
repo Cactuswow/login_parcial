@@ -28,18 +28,21 @@ class _FormLoginState extends ConsumerState<FormLogin> {
   @override
   void initState() {
     super.initState();
-    getUsers();
   }
 
-  void getUsers() async {
+  Future<void> getUsers() async {
     final users = ref.read(registeredUsersProvider);
     final newUsers = await getRegisteredUsersApi(users);
     ref.read(registeredUsersProvider.notifier).update((state) => newUsers);
   }
 
+  void changeStateFetch(bool isFetching) {
+    ref.read(isFetchingUsersProvider.notifier).update((state) => isFetching);
+  }
+
   @override
   Widget build(BuildContext context) {
-    void save() {
+    void handleForm() {
       if (formKey.currentState!.validate()) {
         final users = ref.read(registeredUsersProvider);
         final user = getUserLogged(
@@ -57,6 +60,13 @@ class _FormLoginState extends ConsumerState<FormLogin> {
 
         showSnackBar(context, 'No se ha encontrado ninguna coincidencia');
       }
+    }
+
+    void save() async {
+      changeStateFetch(true);
+      await getUsers();
+      changeStateFetch(false);
+      handleForm();
     }
 
     return Container(

@@ -4,6 +4,7 @@ import 'package:login_parcial/services/fetch_data.dart';
 
 final registeredUsersProvider = StateProvider((ref) => <User>[]);
 final userLoggedProvider = StateProvider<User?>((ref) => null);
+final isFetchingUsersProvider = StateProvider((ref) => false);
 
 Future<List<User>> getRegisteredUsersApi(List<User> registeredUsers) async {
   if (registeredUsers.isNotEmpty) return registeredUsers;

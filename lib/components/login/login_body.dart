@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:login_parcial/components/login/form.dart';
+import 'package:login_parcial/context/user_context.dart';
 
-class LoginBody extends StatelessWidget {
+class LoginBody extends ConsumerWidget {
   const LoginBody({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final mediaQuery = MediaQuery.of(context).size;
 
     Widget loginContainer({children}) {
@@ -33,11 +35,28 @@ class LoginBody extends StatelessWidget {
       );
     }
 
+    Widget getLoader() {
+      final isFetching = ref.watch(isFetchingUsersProvider);
+
+      if (!isFetching) return const SizedBox();
+
+      return const Positioned(
+        bottom: 30,
+        right: 30,
+        child: CircularProgressIndicator(),
+      );
+    }
+
     return loginContainer(
       children: [
-        const Expanded(
+        Expanded(
           flex: 3,
-          child: FormLogin(),
+          child: Stack(
+            children: [
+              const FormLogin(),
+              getLoader(),
+            ],
+          ),
         ),
         Expanded(
           flex: 2,
