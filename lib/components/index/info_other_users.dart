@@ -48,6 +48,14 @@ class InfoOtherUsers extends ConsumerWidget {
                                     width: 60,
                                     height: 60,
                                     fit: BoxFit.cover,
+                                    errorBuilder:
+                                        (context, error, stackTrace) =>
+                                            const Image(
+                                      image: AssetImage("floopa.jpg"),
+                                      width: 60,
+                                      height: 60,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(
