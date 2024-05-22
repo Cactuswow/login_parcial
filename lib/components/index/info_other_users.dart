@@ -13,42 +13,63 @@ class InfoOtherUsers extends ConsumerWidget {
         users.where((actualUser) => actualUser != user).toList();
 
     return Container(
-      height: 600,
-      decoration: const BoxDecoration(
-        color: Colors.red,
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 15,
-            color: Colors.black26,
-            spreadRadius: 3,
-          )
-        ],
-      ),
+      height: 450,
+      constraints: const BoxConstraints(maxWidth: 900),
       child: SingleChildScrollView(
         child: Column(
           children: usersSorted
               .map(
-                (e) => Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(9999),
-                        child: Image.network(
-                          e.imageUrl,
-                          width: 60,
-                          height: 60,
-                          fit: BoxFit.cover,
+                (e) => Column(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: e.role == "admin"
+                            ? Colors.blue
+                            : Colors.transparent,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          bottom: 8,
+                          right: 15,
+                          left: 15,
+                          top: 8,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(9999),
+                                  child: Image.network(
+                                    e.imageUrl,
+                                    width: 60,
+                                    height: 60,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                  width: 10,
+                                ),
+                                Text(
+                                  e.name,
+                                  style: const TextStyle(fontSize: 18),
+                                )
+                              ],
+                            ),
+                            Text(e.role),
+                          ],
                         ),
                       ),
-                      const SizedBox(
-                        height: 10,
-                        width: 10,
-                      ),
-                      Text(e.name)
-                    ],
-                  ),
+                    ),
+                    const SizedBox(
+                      width: 20,
+                      height: 20,
+                    )
+                  ],
                 ),
               )
               .toList(),

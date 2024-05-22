@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:login_parcial/context/color_context.dart';
 import 'package:login_parcial/context/user_context.dart';
 
 class InfoUserLogged extends ConsumerWidget {
@@ -7,21 +8,14 @@ class InfoUserLogged extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final user = ref.read(userLoggedProvider)!;
+    final colorMode = ref.watch(darkModeProvider);
 
     return Container(
-      constraints: const BoxConstraints(maxWidth: 250),
+      constraints: const BoxConstraints(maxWidth: 300),
       decoration: const BoxDecoration(
         // color: Colors.blue,
         borderRadius: BorderRadius.all(Radius.circular(10)),
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 15,
-            color: Colors.black26,
-            spreadRadius: 3,
-          )
-        ],
       ),
       child: Column(
         children: [
@@ -40,18 +34,43 @@ class InfoUserLogged extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [const Text("NOMBRE: "), Text(user.name)],
               ),
+              const SizedBox(
+                width: 10,
+                height: 10,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [const Text("ID: "), Text(user.id)],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [const Text("ROLE: "), Text(user.role)],
+              const SizedBox(
+                width: 10,
+                height: 10,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [const Text("EMAIL: "), Text(user.email)],
+                children: [const Text("ROL: "), Text(user.role)],
               ),
+              const SizedBox(
+                width: 10,
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text("EMAIL: "),
+                  Text(
+                    user.email,
+                    style: const TextStyle(
+                      decoration: TextDecoration.underline,
+                    ),
+                  )
+                ],
+              ),
+              IconButton(
+                  onPressed: () {
+                    ref.read(darkModeProvider.notifier).update((s) => !s);
+                  },
+                  icon: Icon(getIconColorMode(colorMode)))
             ],
           )
         ],

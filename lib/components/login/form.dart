@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:login_parcial/components/login/button_submit.dart';
 import 'package:login_parcial/components/login/constants.dart';
 import 'package:login_parcial/components/login/input_field.dart';
+import 'package:login_parcial/components/login/password_field.dart';
 import 'package:login_parcial/context/user_context.dart';
 
 class FormLogin extends ConsumerStatefulWidget {
@@ -105,7 +106,7 @@ class _FormLoginState extends ConsumerState<FormLogin> {
                   controller: userEmailController,
                   validator: userEmailValidator),
               const SizedBox(height: 15),
-              InputField(
+              PasswordField(
                 label: "Ingresa tu contraseña",
                 icon: Icons.key,
                 controller: passwordController,
