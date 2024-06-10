@@ -26,6 +26,11 @@ class InfoUserLogged extends ConsumerWidget {
               width: 100,
               height: 100,
               fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) => const Image(
+                image: AssetImage("floopa.jpg"),
+                width: 100,
+                height: 100,
+              ),
             ),
           ),
           Column(
