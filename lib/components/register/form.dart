@@ -6,30 +6,27 @@ import 'package:login_parcial/components/login/constants.dart';
 import 'package:login_parcial/components/login/input_field.dart';
 import 'package:login_parcial/components/login/password_field.dart';
 import 'package:login_parcial/context/user_context.dart';
+import 'package:login_parcial/components/register/constants.dart';
 
-class FormLogin extends ConsumerStatefulWidget {
-  const FormLogin({super.key});
+class FormRegister extends ConsumerStatefulWidget {
+  const FormRegister({super.key});
 
   @override
-  ConsumerState<FormLogin> createState() => _FormLoginState();
+  ConsumerState<FormRegister> createState() => _FormRegisterState();
 }
 
-class _FormLoginState extends ConsumerState<FormLogin> {
+class _FormRegisterState extends ConsumerState<FormRegister> {
   final TextEditingController userEmailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController userNameController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
     userEmailController.dispose();
     passwordController.dispose();
+    userNameController.dispose();
     super.dispose();
-  }
-
-  Future<void> getUsers() async {
-    final users = ref.read(registeredUsersProvider);
-    final newUsers = await getRegisteredUsersApi(users);
-    ref.read(registeredUsersProvider.notifier).update((state) => newUsers);
   }
 
   void changeStateFetch(bool isFetching) {
@@ -39,30 +36,25 @@ class _FormLoginState extends ConsumerState<FormLogin> {
   @override
   Widget build(BuildContext context) {
     void handleForm() {
-      if (formKey.currentState!.validate()) {
-        final users = ref.read(registeredUsersProvider);
-        final user = getUserLogged(
-          userEmailController.text,
-          passwordController.text,
-          users,
-        );
+      try {
+        final dynamic data = {
+          "name": userNameController.text,
+          "password": passwordController.text,
+          "email": userEmailController.text
+        };
 
-        if (user != null) {
-          ref.read(userLoggedProvider.notifier).update((state) => user);
-          showSnackBar(context, '¡Bienvenido! ${user.name}');
-          context.push("/");
-          return;
-        }
-
-        showSnackBar(context, 'No se ha encontrado ninguna coincidencia');
+        postUser(data);
+        showSnackBar(context, 'Registro completo');
+        context.push("/login");
+      } catch (e) {
+        showSnackBar(context, 'Correo en uso');
       }
     }
 
     void save() async {
       changeStateFetch(true);
-      await getUsers();
-      changeStateFetch(false);
       handleForm();
+      changeStateFetch(false);
     }
 
     return Container(
@@ -81,11 +73,12 @@ class _FormLoginState extends ConsumerState<FormLogin> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                "LOGIN",
+                "REGÍSTRATE",
                 style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 28,
-                    color: Colors.white),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 28,
+                  color: Colors.white,
+                ),
               ),
               const Text(
                 "Ingresa tu correo y contraseña",
@@ -95,6 +88,13 @@ class _FormLoginState extends ConsumerState<FormLogin> {
                 height: 20,
                 width: 20,
               ),
+              InputField(
+                label: "Ingresa tu nombre",
+                icon: Icons.add_card,
+                controller: userNameController,
+                validator: nameValidator,
+              ),
+              const SizedBox(height: 15),
               InputField(
                 label: "Ingresa tu correo",
                 icon: Icons.person,
@@ -117,9 +117,9 @@ class _FormLoginState extends ConsumerState<FormLogin> {
                   ButtonSubmit(action: save),
                   const SizedBox(width: 15),
                   TextButton(
-                    child: const Text("Regístrate"),
+                    child: const Text("Inicia sesión"),
                     onPressed: () {
-                      context.push("/register");
+                      context.push("/login");
                     },
                   )
                 ],

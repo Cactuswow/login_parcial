@@ -34,6 +34,7 @@ void showSnackBar(BuildContext context, String text) {
 }
 
 User? getUserLogged(String userEmail, String userPassword, List<User> users) {
+  print(users);
   final usersFiltered = users.where(
       (user) => user.email == userEmail && user.password == userPassword);
 

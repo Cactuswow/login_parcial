@@ -10,3 +10,12 @@ Future<dynamic> getFetchData(String url) async {
     return [];
   }
 }
+
+Future<dynamic> postFetchData(String url, dynamic obj) async {
+  try {
+    Response response = await dio.post(url, data: obj);
+    return response.data;
+  } catch (e) {
+    return [];
+  }
+}

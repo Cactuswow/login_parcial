@@ -12,7 +12,7 @@ class AppTheme {
       ),
       filledButtonTheme: const FilledButtonThemeData(
         style: ButtonStyle(
-          backgroundColor: WidgetStatePropertyAll(Colors.blue),
+          backgroundColor: MaterialStatePropertyAll(Colors.blue),
         ),
       ),
     );
@@ -23,7 +23,7 @@ class AppTheme {
       brightness: Brightness.dark,
       filledButtonTheme: const FilledButtonThemeData(
         style: ButtonStyle(
-          backgroundColor: WidgetStatePropertyAll(Colors.blue),
+          backgroundColor: MaterialStatePropertyAll(Colors.blue),
         ),
       ),
     );
