@@ -5,12 +5,14 @@ export const userController = {
     res.json(await useUser.getUsers())
   },
   getUser: async (req, res) => {
-    const { id } = req.params
-    res.json(await userController.getUser(id))
+    const { email, password } = req.query
+    console.log({ email, password });
+    const data = await useUser.getUserByLogin(email, password)
+    console.log(data);
+    res.json(data)
   },
   postUser: async (req, res) => {
     const { name, email, password } = req.body
-    await useUser.postUser({ name, email, password })
-    res.send('postUser')
+    await useUser.postUser(res, { name, email, password })
   }
 }

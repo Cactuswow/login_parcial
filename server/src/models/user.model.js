@@ -1,23 +1,33 @@
+import { avatars } from '../constants/constants.js'
 import { sequelize } from '../services/useUser.js'
 
 export const useUser = {
-  async getUsers () {
+  async getUsers() {
     const users = await sequelize.query('SELECT * FROM USERS')
     return users[0]
   },
-  async postUser (user) {
-    await sequelize.query('INSERT INTO USERS (name, email, password, role, avatar) VALUES (:name, :email, :password, :role, :avatar)', {
-      replacements: {
-        name: user.name,
-        email: user.email,
-        password: user.password,
-        role: user.role ?? 'customer',
-        avatar: user.avatar ?? 'floopa'
-      }
-    })
+  async postUser(res, user) {
+    try {
+      await sequelize.query('INSERT INTO USERS (name, email, password, role, avatar) VALUES (:name, :email, :password, :role, :avatar)', {
+        replacements: {
+          name: user.name,
+          email: user.email,
+          password: user.password,
+          role: user.role ?? 'customer',
+          avatar: user.avatar ?? avatars.sort(() => 0.5 - Math.random())[0]
+        }
+      })
+      res.json({
+        status: "Creado"
+      })
+    } catch (r) {
+      res.status(401).json({
+        status: "Correo existente"
+      })
+    }
   },
-  async getUserByLogin (email, password) {
+  async getUserByLogin(email, password) {
     const users = await this.getUsers()
-    return users.find(user => user.email === email && user.password === password)
+    return users.find(user => user.email === email && user.password === password) ?? []
   }
 }

@@ -41,6 +41,7 @@ class _FormLoginState extends ConsumerState<FormLogin> {
     void handleForm() {
       if (formKey.currentState!.validate()) {
         final users = ref.read(registeredUsersProvider);
+        print(users.last);
         final user = getUserLogged(
           userEmailController.text,
           passwordController.text,
@@ -59,6 +60,7 @@ class _FormLoginState extends ConsumerState<FormLogin> {
     }
 
     void save() async {
+      print("C");
       changeStateFetch(true);
       await getUsers();
       changeStateFetch(false);

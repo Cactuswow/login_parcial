@@ -8,10 +8,7 @@ final isFetchingUsersProvider = StateProvider((ref) => false);
 const baseUrl = "http://localhost:5000/";
 
 Future<List<User>> getRegisteredUsersApi(List<User> registeredUsers) async {
-  if (registeredUsers.isNotEmpty) return registeredUsers;
-
   final List<dynamic> newUsers = await getFetchData("${baseUrl}user");
-
   return newUsers.map((json) => User.fromJson(json)).toList();
 }
 
