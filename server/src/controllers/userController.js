@@ -1,16 +1,16 @@
-import { useUser } from '../services/useUser.js'
+import { useUser } from '../models/user.model.js'
 
 export const userController = {
-  getUsers: (req, res) => {
-    res.json(useUser.getUsers())
+  getUsers: async (req, res) => {
+    res.json(await useUser.getUsers())
   },
-  getUser: (req, res) => {
+  getUser: async (req, res) => {
     const { id } = req.params
-    res.json(userController.getUser(id))
+    res.json(await userController.getUser(id))
   },
-  postUser: (req, res) => {
+  postUser: async (req, res) => {
     const { name, email, password } = req.body
-    useUser.postUser({ name, email, password })
+    await useUser.postUser({ name, email, password })
     res.send('postUser')
   }
 }

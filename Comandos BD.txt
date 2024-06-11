@@ -1,0 +1,20 @@
+
+CREATE TABLE USERS(
+	id SERIAL PRIMARY KEY,
+	name TEXT,
+	email TEXT UNIQUE NOT NULL,
+	password TEXT NOT NULL,
+	role TEXT,
+	avatar TEXT
+);
+
+INSERT INTO USERS (name, email, password, role, avatar)
+VALUES 	('Yademir Durán', 'yade@gmail.com', 'yade123', 'admin', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnzNLPlZtpgGE_A_Jkp3wHV7UAg_cLRd8EvQ&s'),
+		('Juan Robles', 'juan@gmail.com', 'juan123', 'customer', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsD03zcQD2Us5acOv1Bq3yRUIh4kpznZaF3G3Cj4PQHw6f0MbAv1P88654jYOdah9Wxos'),		
+		('Sergio Santos', 'sergio@gmail.com', 'sergio123', 'customer', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTptvveAWmc0fte8QDdtTi23PhCHKWcTlzB6g&s'),
+ 		('Maria Jose', 'mariaj@gmail.com', 'maria123', 'admin', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJOPZxcr1N8MBo0EO-IVcU-OzQ3hpnb4Aokg&s'),
+ 		('Roberto Perez', 'roberto@gmail.com', 'roberto123', 'customer', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRn-aB5brTmpeDnB_5cPXLxQl-j0khXeQl25-xewz8n7M08IFk7mt3BV-TKlK77AgTMhLA'),
+ 		('Maicol Duarte', 'maicol@gmail.com', 'maicol123', 'admin', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzRl4QePkwiCAf1rYTViGDNCgnPdfgCu7CLpEpAK7muzIt6lAjGYf-iQDw4BWH_jlSycg'),
+ 		('Julian Arias', 'julian@gmail.com', 'julian123', 'customer', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpi6b-mzaJ55xj6FGi-Q9JKRZBxuwwPJ1qViO7gotYEH44DL59argTjwatasqn0h_0HHQ'),
+ 		('Yair Duran', 'yair@gmail.com', 'yair123', 'customer', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfGhkj83xJE-hRvjtLgk-i_QrdtlccR7kLwnVKTxj7rbz1Hs-8YKE2Heey5REETtqJZMU'),
+		('Camila Rincon', 'camila@gmail.com', 'camila123', 'customer', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSPxnj7B1RzG1GV-_CqkdBTxpyV38Y-cU8xFfDwuVhw7bqZ-o6oFrQ8XHfBAy1O4KcSJ4')
