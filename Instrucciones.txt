@@ -1,4 +1,15 @@
 
+Integrantes:
+Bryan David Alvarez Galvis - 192096
+Yademir Hernandez Sanchez - 192100
+
+Pasos para ejecutar:
+flutter pub get 
+* En la carpeta /server -> 
+	npm i
+	npm run dev 
+flutter run 
+
 CREATE TABLE USERS(
 	id SERIAL PRIMARY KEY,
 	name TEXT,

@@ -35,20 +35,22 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
 
   @override
   Widget build(BuildContext context) {
-    void handleForm() {
-      try {
-        final dynamic data = {
-          "name": userNameController.text,
-          "password": passwordController.text,
-          "email": userEmailController.text
-        };
+    void handleForm() async {
+      final dynamic data = {
+        "name": userNameController.text,
+        "password": passwordController.text,
+        "email": userEmailController.text
+      };
 
-        postUser(data);
-        showSnackBar(context, 'Registro completo');
-        context.push("/login");
-      } catch (e) {
+      final status = await postUser(data);
+
+      if (status == false) {
         showSnackBar(context, 'Correo en uso');
+        return;
       }
+
+      showSnackBar(context, 'Registro completo');
+      context.push("/login");
     }
 
     void save() async {

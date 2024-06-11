@@ -13,5 +13,6 @@ Future<List<User>> getRegisteredUsersApi(List<User> registeredUsers) async {
 }
 
 Future<dynamic> postUser(dynamic obj) async {
-  return await postFetchData("${baseUrl}user", obj);
+  final info = await postFetchData("${baseUrl}user", obj);
+  return info;
 }

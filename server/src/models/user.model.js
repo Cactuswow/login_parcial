@@ -18,11 +18,11 @@ export const useUser = {
         }
       })
       res.json({
-        status: "Creado"
+        status: true
       })
     } catch (r) {
-      res.status(401).json({
-        status: "Correo existente"
+      res.status(400).json({
+        status: false
       })
     }
   },

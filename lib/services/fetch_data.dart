@@ -16,6 +16,6 @@ Future<dynamic> postFetchData(String url, dynamic obj) async {
     Response response = await dio.post(url, data: obj);
     return response.data;
   } catch (e) {
-    return [];
+    return false;
   }
 }
